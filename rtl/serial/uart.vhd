@@ -504,7 +504,7 @@ begin
    
    -- cpu write, uart read
    
-   uart0_tx_fifo: sdpram_64_9  -- 64x8 needed but the natural size for xilinx is 64x9
+   /*uart0_tx_fifo: sdpram_64_9  -- 64x8 needed but the natural size for xilinx is 64x9
    port map
    (
       -- async read (uart)
@@ -516,6 +516,25 @@ begin
       A    => uart0_tx_fifo_waddr,
       D    => '0' & i_cpu_d
    );
+   */
+   
+   uart0_tx_fifo : entity work.dualport_2clk_ram
+	generic map 
+    (
+        ADDR_WIDTH   => 6,
+        DATA_WIDTH   => 9
+    )
+	port map
+	(
+	    clock_a   => i_CLK_n,
+        address_a => uart0_tx_fifo_raddr,
+        q_a       => uart0_tx_byte,
+        clock_b   => i_CLK_n,
+        wren_b    => uart0_tx_fifo_we,
+        address_b => uart0_tx_fifo_waddr,
+        data_b    => '0' & i_cpu_d
+	);
+   
    
    uart0_tx_en <= '1' when uart0_tx_busy = '0' and uart0_tx_fifo_empty = '0' else '0';
    
@@ -689,6 +708,7 @@ begin
    
    -- cpu write, uart read
    
+   /*
    uart1_tx_fifo: sdpram_64_9  -- 64x8 needed but the natural size for xilinx is 64x9
    port map
    (
@@ -700,7 +720,25 @@ begin
       WE   => uart1_tx_fifo_we,
       A    => uart1_tx_fifo_waddr,
       D    => '0' & i_cpu_d
-   );
+   );*/
+   
+   uart1_tx_fifo : entity work.dualport_2clk_ram
+	generic map 
+    (
+        ADDR_WIDTH   => 6,
+        DATA_WIDTH   => 9
+    )
+	port map
+	(
+	    clock_a   => i_CLK_n,
+        address_a => uart1_tx_fifo_raddr,
+        q_a       => uart1_tx_byte,
+        clock_b   => i_CLK_n,
+        wren_b    => uart1_tx_fifo_we,
+        address_b => uart1_tx_fifo_waddr,
+        data_b    => '0' & i_cpu_d
+		
+	);
    
    uart1_tx_en <= '1' when uart1_tx_busy = '0' and uart1_tx_fifo_empty = '0' else '0';
    

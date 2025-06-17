@@ -198,6 +198,7 @@ begin
    -- TILEMAP PIXEL MEMORY
    -----------------------
    
+   /*
    tilemem : sdpram_16_9
    port map (
       DPRA  => video_addr,
@@ -206,7 +207,23 @@ begin
       DPO   => video_data,
       A     => tm_tilemap_pixel_waddr,
       D     => tm_tilemap_pixel_wdata
-   );
+   );*/
+   
+   tilemem : entity work.dualport_2clk_ram
+	generic map 
+    (
+        ADDR_WIDTH   => 4,
+        DATA_WIDTH   => 9
+    )
+	port map
+	(
+	    address_a => video_addr,
+	    clock_a   => clock_master_i,
+	    wren_a    => tm_tilemap_pixel_we,
+	    q_b       => video_data,
+	    address_b => tm_tilemap_pixel_waddr,
+	    data_a    => tm_tilemap_pixel_wdata   
+    );
 
    -------------
    -- SCHEDULING

@@ -326,7 +326,7 @@ begin
    -- simple dual port ram (sync write, async read)
    -- X position (bits 7:0)
    
-   attr0 : sdpram_128_8
+   /*attr0 : sdpram_128_8
    port map (
       DPRA => spr_attr_a,
       CLK  => clock_master_180o_i,
@@ -334,7 +334,27 @@ begin
       DPO  => sprite_attr_0,
       A    => attr_a,
       D    => attr_data
-   );
+   );*/
+   
+   attr0 : entity work.dualport_2clk_ram
+	generic map 
+    (
+        ADDR_WIDTH   => 7,
+        DATA_WIDTH   => 8
+    )
+	port map
+	(
+	    clock_a   => clock_master_180o_i,
+        address_a => spr_attr_a,
+        q_a       => sprite_attr_0,
+        
+        clock_b   => clock_master_180o_i,
+        wren_b    => attr0_we,
+        address_b => attr_a,
+        data_b    => attr_data
+		
+	);
+   
 
 -- attr0 : entity work.sdpram
 -- generic map (
@@ -354,7 +374,7 @@ begin
    -- simple dual port ram (sync write, async read)
    -- Y position (bits 7:0)
    
-   attr1 : sdpram_128_8
+   /*attr1 : sdpram_128_8
    port map (
       DPRA => spr_attr_a,
       CLK  => clock_master_180o_i,
@@ -362,7 +382,25 @@ begin
       DPO  => sprite_attr_1,
       A    => attr_a,
       D    => attr_data
-   );
+   );*/
+   
+   attr1 : entity work.dualport_2clk_ram
+	generic map 
+    (
+        ADDR_WIDTH   => 7,
+        DATA_WIDTH   => 8
+    )
+	port map
+	(
+	    clock_a   => clock_master_180o_i,
+        address_a => spr_attr_a,
+        q_a       => sprite_attr_1,
+        
+        clock_b   => clock_master_180o_i,
+        wren_b    => attr1_we,
+        address_b => attr_a,
+        data_b    => attr_data
+	);
 
 -- attr1 : entity work.sdpram
 -- generic map (
@@ -382,6 +420,7 @@ begin
    -- simple dual port ram (sync write, async read)
    -- bits 7-4 is palette offset, bit 3 is X mirror, bit 2 is Y mirror, bit 1 is the rotate flag and bit 0 is X MSB
    
+   /*
    attr2 : sdpram_128_8
    port map (
       DPRA => spr_attr_a,
@@ -390,7 +429,26 @@ begin
       DPO  => sprite_attr_2,
       A    => attr_a,
       D    => attr_data
-   );
+   );*/
+   
+   attr2 : entity work.dualport_2clk_ram
+	generic map 
+    (
+        ADDR_WIDTH   => 7,
+        DATA_WIDTH   => 8
+    )
+	port map
+	(
+	    clock_a   => clock_master_180o_i,
+        address_a => spr_attr_a,
+        q_a       => sprite_attr_2,
+        
+        clock_b   => clock_master_180o_i,
+        wren_b    => attr2_we,
+        address_b => attr_a,
+        data_b    => attr_data
+		
+	);
 
 -- attr2 : entity work.sdpram
 -- generic map (
@@ -410,6 +468,7 @@ begin
    -- simple dual port ram (sync write, async read)
    -- bit 7 is the visible flag, bit 6 set if fifth attr byte follows, bits 5-0 is Name (pattern index, 0-63)
    
+   /*
    attr3 : sdpram_128_8
    port map (
       DPRA => spr_attr_a,
@@ -418,7 +477,25 @@ begin
       DPO  => sprite_attr_3,
       A    => attr_a,
       D    => attr_data
-   );
+   );*/
+   
+   attr3 : entity work.dualport_2clk_ram
+	generic map 
+    (
+        ADDR_WIDTH   => 7,
+        DATA_WIDTH   => 8
+    )
+	port map
+	(
+	    clock_a   => clock_master_180o_i,
+        address_a => spr_attr_a,
+        q_a       => sprite_attr_3,
+        
+        clock_b   => clock_master_180o_i,
+        wren_b    => attr3_we,
+        address_b => attr_a,
+        data_b    => attr_data
+    );
 
 -- attr3 : entity work.sdpram
 -- generic map (
@@ -438,7 +515,7 @@ begin
    -- simple dual port ram (sync write, async read)
    -- bit 7 set for 4-bit patterns, bit 6 is Name(6), bit 5 is reserved at 0, bits(4:3) XX scale, bits(2:1) YY scale, bit 0 is Y MSB
 
-   attr4 : sdpram_128_8
+   /*attr4 : sdpram_128_8
    port map (
       DPRA => spr_attr_a,
       CLK  => clock_master_180o_i,
@@ -446,7 +523,25 @@ begin
       DPO  => sprite_attr_4,
       A    => attr_a,
       D    => attr_data
-   );
+   );*/
+   
+   attr4 : entity work.dualport_2clk_ram
+	generic map 
+    (
+        ADDR_WIDTH   => 7,
+        DATA_WIDTH   => 8
+    )
+	port map
+	(
+	    clock_a   => clock_master_180o_i,
+        address_a => spr_attr_a,
+        q_a       => sprite_attr_4,
+        
+        clock_b   => clock_master_180o_i,
+        wren_b    => attr4_we,
+        address_b => attr_a,
+        data_b    => attr_data
+    );
 
 -- attr4 : entity work.sdpram
 -- generic map (
@@ -469,6 +564,7 @@ begin
 
    -- single port ram (sync write, async read)
    
+   /*
    linebuf0 : spram_320_9
    port map (
       CLK  => clock_master_180o_i,
@@ -476,7 +572,22 @@ begin
       SPO  => l0_spo,
       A    => l0_a,
       D    => l0_d
-   );
+   );*/
+   
+   linebuf0 : entity work.dualport_2clk_ram
+	generic map 
+    (
+        ADDR_WIDTH   => 9,
+        DATA_WIDTH   => 9
+    )
+	port map
+	(
+	    clock_a   => clock_master_180o_i,
+	    wren_a    => l0_we,
+	    q_a       => l0_spo,
+        address_a => l0_a,
+        data_a    => l0_d
+    );
 
 -- linebuf0 : entity work.spram_async
 -- generic map (
@@ -493,14 +604,30 @@ begin
 
    -- single port ram (sync write, async read)
    
-   linebuf1 : spram_320_9
+   /*linebuf1 : spram_320_9
    port map (
       CLK  => clock_master_180o_i,
       WE   => l1_we,
       SPO  => l1_spo,
       A    => l1_a,
       D    => l1_d
-   );
+   );*/
+   
+   linebuf1 : entity work.dualport_2clk_ram
+	generic map 
+    (
+        ADDR_WIDTH   => 9,
+        DATA_WIDTH   => 9
+    )
+	port map
+	(
+	    clock_a   => clock_master_180o_i,
+	    wren_a    => l1_we,
+	    q_a       => l1_spo,
+        address_a => l1_a,
+        data_a    => l1_d
+    );
+
 
 -- linebuf1 : entity work.spram_async
 -- generic map (
@@ -560,7 +687,8 @@ begin
    
    -- simple dual port ram (sync write, sync read zero delay)
    
-   pattern : sdpbram_16k_8
+   
+   /*pattern : sdpbram_16k_8
    port map (
       WEA        => pattern_we,
       ADDRA      => pattern_a,
@@ -571,7 +699,25 @@ begin
       ADDRB      => spr_pat_addr,
       DOUTB      => spr_pat_data,
       CLKB       => clock_master_i
-   );
+   );*/
+   
+   pattern : entity work.dualport_2clk_ram
+	generic map 
+    (
+        ADDR_WIDTH   => 14,
+        DATA_WIDTH   => 8
+    )
+	port map
+	(
+	    wren_a    => pattern_we(0),
+	    address_a => pattern_a,
+	    data_a    => cpu_data_q,
+	    clock_a   => clock_master_180o_i,
+	    
+	    address_b => spr_pat_addr,
+	    q_b       => spr_pat_data,
+	    clock_b   => clock_master_i  
+    );
 
 -- pattern: entity work.dpram
 -- generic map (

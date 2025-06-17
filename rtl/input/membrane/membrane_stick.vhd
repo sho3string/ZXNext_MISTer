@@ -168,8 +168,8 @@ begin
    end process;
    
    -- joystick bit to key assignment lookup
-
-   udk_map: keyjoy_sdpram_64_6  -- initialized with sinclair / cursor mappings
+   
+   /*udk_map: keyjoy_sdpram_64_6  -- initialized with sinclair / cursor mappings
    port map                     -- src/ram/init/keyjoy_64_6.coe
    (
       -- async read (keymap)
@@ -180,7 +180,28 @@ begin
       WE   => i_keymap_we,
       A    => i_keymap_addr(4) & '1' & i_keymap_addr(3 downto 0),
       D    => i_keymap_data
-   );
+   );*/
+   
+   udk_map : entity work.dualport_2clk_ram
+	generic map 
+    (
+        ADDR_WIDTH   => 6,
+        DATA_WIDTH   => 6
+    )
+	port map
+	(
+	    -- async read (keymap)
+	    clock_a   => i_CLK,
+        address_a => joy_sel & sram_addr,
+        q_a       => joy_keymap_do,
+        -- sync write (cpu)
+        clock_b   => i_CLK,
+        wren_b    => i_keymap_we,
+        address_b => i_keymap_addr(4) & '1' & i_keymap_addr(3 downto 0),
+        data_b    => i_keymap_data
+		
+	);
+   
 
    -- membrane column bits computation
 

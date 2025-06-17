@@ -23,7 +23,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 
-entity debounce is
+entity debounce_zx is
    generic
    (
       INITIAL_STATE  : std_logic := '0';
@@ -38,7 +38,7 @@ entity debounce is
    );
 end entity;
 
-architecture rtl of debounce is
+architecture rtl of debounce_zx is
 
    signal button        : std_logic_vector(1 downto 0) := "10";
    signal button_noise  : std_logic;

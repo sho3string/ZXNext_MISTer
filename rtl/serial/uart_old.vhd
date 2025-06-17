@@ -82,7 +82,7 @@ begin
 
    -- RX process
    
-   db : entity work.debounce
+   db : entity work.debounce_zx
    generic map
    (
       INITIAL_STATE  => '1',
