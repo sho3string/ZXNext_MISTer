@@ -217,12 +217,12 @@ begin
     )
 	port map
 	(
-	    address_a => video_addr,
-	    clock_a   => clock_master_i,
-	    wren_a    => tm_tilemap_pixel_we,
-	    q_b       => video_data,
-	    address_b => tm_tilemap_pixel_waddr,
-	    data_a    => tm_tilemap_pixel_wdata   
+        address_a => video_addr,
+        clock_a   => clock_master_i,
+        wren_a    => tm_tilemap_pixel_we,
+        q_b       => video_data,
+        address_b => tm_tilemap_pixel_waddr,
+        data_a    => tm_tilemap_pixel_wdata   
     );
 
    -------------

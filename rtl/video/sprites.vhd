@@ -344,7 +344,7 @@ begin
     )
 	port map
 	(
-	    clock_a   => clock_master_180o_i,
+        clock_a   => clock_master_180o_i,
         address_a => spr_attr_a,
         q_a       => sprite_attr_0,
         
@@ -392,7 +392,7 @@ begin
     )
 	port map
 	(
-	    clock_a   => clock_master_180o_i,
+        clock_a   => clock_master_180o_i,
         address_a => spr_attr_a,
         q_a       => sprite_attr_1,
         
@@ -439,7 +439,7 @@ begin
     )
 	port map
 	(
-	    clock_a   => clock_master_180o_i,
+        clock_a   => clock_master_180o_i,
         address_a => spr_attr_a,
         q_a       => sprite_attr_2,
         
@@ -487,7 +487,7 @@ begin
     )
 	port map
 	(
-	    clock_a   => clock_master_180o_i,
+        clock_a   => clock_master_180o_i,
         address_a => spr_attr_a,
         q_a       => sprite_attr_3,
         
@@ -533,7 +533,7 @@ begin
     )
 	port map
 	(
-	    clock_a   => clock_master_180o_i,
+        clock_a   => clock_master_180o_i,
         address_a => spr_attr_a,
         q_a       => sprite_attr_4,
         
@@ -582,9 +582,9 @@ begin
     )
 	port map
 	(
-	    clock_a   => clock_master_180o_i,
-	    wren_a    => l0_we,
-	    q_a       => l0_spo,
+        clock_a   => clock_master_180o_i,
+        wren_a    => l0_we,
+        q_a       => l0_spo,
         address_a => l0_a,
         data_a    => l0_d
     );
@@ -621,9 +621,9 @@ begin
     )
 	port map
 	(
-	    clock_a   => clock_master_180o_i,
-	    wren_a    => l1_we,
-	    q_a       => l1_spo,
+        clock_a   => clock_master_180o_i,
+        wren_a    => l1_we,
+        q_a       => l1_spo,
         address_a => l1_a,
         data_a    => l1_d
     );
@@ -709,14 +709,14 @@ begin
     )
 	port map
 	(
-	    wren_a    => pattern_we(0),
-	    address_a => pattern_a,
-	    data_a    => cpu_data_q,
-	    clock_a   => clock_master_180o_i,
-	    
-	    address_b => spr_pat_addr,
-	    q_b       => spr_pat_data,
-	    clock_b   => clock_master_i  
+        wren_a    => pattern_we(0),
+        address_a => pattern_a,
+        data_a    => cpu_data_q,
+        clock_a   => clock_master_180o_i,
+        
+        address_b => spr_pat_addr,
+        q_b       => spr_pat_data,
+        clock_b   => clock_master_i  
     );
 
 -- pattern: entity work.dpram

@@ -24,7 +24,7 @@ module rtc #(parameter CLOCK_RATE)
 	input        clk,
 	input        reset,
 
-	input [64:0] RTC,
+	input [64:0] rtc,
 
 	input        scl_i,
 	input        sda_i,
@@ -187,15 +187,15 @@ always @(posedge clk) begin
 		end
 	end
 
-	flg <= RTC[64];
-	if (flg != RTC[64]) begin
-		data[SEC]  <= RTC[6:0];
-		data[MIN]  <= RTC[15:8];
-		data[HR]   <= RTC[21:16];
-		data[DAY]  <= RTC[55:48] + 1'b1;
-		data[DATE] <= RTC[31:24];
-		data[MON]  <= RTC[39:32];
-		data[YEAR] <= RTC[47:40];
+	flg <= rtc[64];
+	if (flg != rtc[64]) begin
+		data[SEC]  <= rtc[6:0];
+		data[MIN]  <= rtc[15:8];
+		data[HR]   <= rtc[21:16];
+		data[DAY]  <= rtc[55:48] + 1'b1;
+		data[DATE] <= rtc[31:24];
+		data[MON]  <= rtc[39:32];
+		data[YEAR] <= rtc[47:40];
 		data[CTL]  <= 0;
 		seccnt     <= 1;
 	end  
